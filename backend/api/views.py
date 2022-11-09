@@ -4,6 +4,9 @@ from django.forms.models import model_to_dict
 import json
 from products.models import Product
 
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
 def api_home(request, *args, **kwargs):
 
     body = request.body
@@ -30,6 +33,18 @@ def api_model(request, *args, **kwargs):
         # data['content'] = db_data.content
         # data['price'] = db_data.price
 
+        data = model_to_dict(db_data)
+
+    return JsonResponse(data)
+
+@api_view(["GET"])
+def restapi_view(request, *args, **kwargs):
+    """
+    Django Rest Framework View
+    """
+    db_data = Product.objects.all().order_by("?").first() # Get all objects and pick first
+    data = {}
+    if db_data:
         data = model_to_dict(db_data)
 
     return JsonResponse(data)

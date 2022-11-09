@@ -29,3 +29,11 @@ Create a simple Django Model. Create a few objects and migrate the changes. Usin
 * Therefore we need to serialize this data to convert it from a QuerySet to Python Dictionary. This is done in 2 ways:
 > 1. Manual Serialization: Extract each field from queryset and store it in a dictionary
 > 2. Using Serailizers library: Python module Serializers to serialize data
+
+## Bringing Django Rest Framework into the picture
+
+**from rest_framework.decorators import api_view**  
+`api_view()`  
+api_view is a decorator that can turn a standard django view into a DRF API view. It takes as parameters a list of strings, which are the acceptable requests that can be made to this view
+
+**Note**: Add 'rest_framework' to installed apps in the Django settings
