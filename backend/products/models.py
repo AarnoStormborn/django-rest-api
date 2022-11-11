@@ -9,6 +9,9 @@ class Product(models.Model):
     @property
     def sale_price(self):
         return f"{self.price*0.8:.2f}"
+    
+    def get_discount(self):
+        return "1221"
 
     class Meta:
         verbose_name_plural = 'Product'

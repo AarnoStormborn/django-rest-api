@@ -37,3 +37,8 @@ Create a simple Django Model. Create a few objects and migrate the changes. Usin
 api_view is a decorator that can turn a standard django view into a DRF API view. It takes as parameters a list of strings, which are the acceptable requests that can be made to this view
 
 **Note**: Add 'rest_framework' to installed apps in the Django settings
+
+### Create an API response
+
+Create a **serializers.py** file in the app directory. Serializer models work very similar to DB models and Model Forms.  
+Import the serializer in the views and serialize the data object retrieved from database. Use `Response()` method from rest_framework to render API response on the view endpoint. 

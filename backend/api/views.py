@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.forms.models import model_to_dict
 import json
 from products.models import Product
-
+from products.serializers import ProductSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -39,12 +39,16 @@ def api_model(request, *args, **kwargs):
 
 @api_view(["GET"])
 def restapi_view(request, *args, **kwargs):
+
     """
     Django Rest Framework View
     """
-    db_data = Product.objects.all().order_by("?").first() # Get all objects and pick first
-    data = {}
-    if db_data:
-        data = model_to_dict(db_data)
 
-    return JsonResponse(data)
+    items = Product.objects.all()
+    data = {}
+    
+    if items:
+        
+        data = ProductSerializer(items, many=True) 
+
+    return Response(data)
