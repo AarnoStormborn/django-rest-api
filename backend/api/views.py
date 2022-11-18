@@ -49,6 +49,21 @@ def restapi_view(request, *args, **kwargs):
     
     if items:
         
-        data = ProductSerializer(items, many=True) 
+        data = ProductSerializer(items, many=True).data
 
     return Response(data)
+
+@api_view(["GET","POST"])
+def restapi_post(request, *args, **kwargs):
+    """
+    Django Rest Framework View: POST request
+    """
+
+    serializer = ProductSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        # instance = serializer.save()
+        # print(instance)
+        data = serializer.data
+        return Response(data)
+    
+    else: return JsonResponse({"problem":"did not work"})
