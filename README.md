@@ -43,11 +43,12 @@ api_view is a decorator that can turn a standard django view into a DRF API view
 Create a **serializers.py** file in the app directory. Serializer models work very similar to DB models and Model Forms.  
 Import the serializer in the views and serialize the data object retrieved from database. Use `Response()` method from rest_framework to render API response on the view endpoint. 
 
-## Generics and Class Based views
+## Class Based Generic Views
 
 rest framework also has generic class based views, just like standard django. The most common ones used for CRUD operations are:
-* `generics.RetrieveAPIView` => Read of CRUD, gives detailed view of each object
-* `generics.CreateAPIView`
-* `generics.ListAPIView` => List all objects of queryset
-* `generics.ListCreateAPIView` => List all objects in post request
-* `generics.`
+* `generics.RetrieveAPIView` => Read of CRUD, gives detailed view of each object. GET request.
+* `generics.ListAPIView` => List all objects of queryset. GET request for all objects.
+* `generics.CreateAPIView` => Create object in the Database. POST request.
+* `generics.ListCreateAPIView` => List all objects in post request. This is both GET and POST request
+* `generics.UpdateAPIView` => Using the Primary Key as the lookup field, update the particular instance. PUT request, does not support GET.
+* `generics.DestroyAPIView` => Usingh the Primary key as the lookup field, delete the particular instance. DELETE request.

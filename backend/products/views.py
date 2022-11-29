@@ -13,6 +13,7 @@ class ProductCreateAPIView(generics.CreateAPIView):
     serializer_class = ProductSerializer
 
     def perform_create(self, serializer):
+        serializer.save()
         print(serializer.validated_data)
 
 product_create_view = ProductCreateAPIView.as_view()
@@ -55,7 +56,6 @@ class ProductUpdateAPIView(generics.UpdateAPIView):
         serializer.save()
         print(serializer.validated_data)
 
-
 product_update_view = ProductUpdateAPIView.as_view()
 
 class ProductDestroyAPIView(generics.DestroyAPIView):
@@ -81,10 +81,7 @@ class ProductMixinView(mixins.ListModelMixin, mixins.RetrieveModelMixin, generic
             return self.retrieve(request, *args, **kwargs)
         return self.list(request, *args, **kwargs)
 
-    # def post():
-
 product_mixin_view = ProductMixinView.as_view()
-
 
 
 @api_view(['GET', 'POST'])
@@ -93,10 +90,11 @@ def product_alt_view(request, pk=None, *args, **kwargs):
 
     if method == 'GET':
 
+        
         # detail view
         if pk is not None:
             obj = get_object_or_404(Product, pk=pk)
-            data = ProductSerializer(qs).data
+            data = ProductSerializer(obj).data
             return Response(data)
 
         # list view
